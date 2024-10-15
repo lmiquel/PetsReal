@@ -10,7 +10,7 @@ await registerCommands(client);
 
 client.once('ready',() => {
     console.log(`PetsReal is online!`);
-    scheduleRandomTimeMessage();
+    scheduleRandomTimeMessage(client);
 });
 
 client.on('interactionCreate', async (interaction) => {
