@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "discord.js";
 
-export const setRoleCommand = {
+const setRoleCommand = {
     data: new SlashCommandBuilder()
         .setName('setrole')
         .setDescription('Sélectionnez le rôle à taguer lors de l\'envoi du message.')
@@ -15,3 +15,5 @@ export const setRoleCommand = {
         await interaction.reply(`Le rôle a été défini sur ${role}`);
     },
 };
+
+export default setRoleCommand;

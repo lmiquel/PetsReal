@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "discord.js";
 
-export const setChannelCommand = {
+const setChannelCommand = {
     data: new SlashCommandBuilder()
         .setName('setchannel')
         .setDescription('Sélectionnez le channel pour envoyer les messages.')
@@ -19,3 +19,5 @@ export const setChannelCommand = {
         await interaction.reply(`Le channel a été défini sur ${channel}`);
     },
 };
+
+export default setChannelCommand;

@@ -1,3 +1,5 @@
+import { sendMessage } from "./send-message.js";
+
 let currentTimeout = null;
 
 export const scheduleRandomTimeMessage = (client) => {
@@ -13,26 +15,14 @@ export const scheduleRandomTimeMessage = (client) => {
 
     if (nextTime <= now) {
         console.log('PetsReal: Programmed date already in the past. Reprogramming a new time.')
-        scheduleRandomTimeMessage();
+        scheduleRandomTimeMessage(client);
     } else {
         console.log(`PetsReal: message programmed at ${nextTime}`);
                 
         const timeUntilNextMessage = nextTime - now;
         currentTimeout = setTimeout(async () => {
             await sendMessage(client);
-            scheduleRandomTimeMessage();
+            scheduleRandomTimeMessage(client);
         }, timeUntilNextMessage);
     }
-}
-
-const sendMessage = async (client) => {
-    const { channels, selectedChannelId, selectedRoleId } = client;
-    
-    const channel = channels.cache.get(selectedChannelId);
-    const mention = selectedRoleId ? `<@&${selectedRoleId}> ` : '';
-    
-    if (!channel) return console.error('PetsReal: Channel not found!');
-
-    await channel.send(`${mention}C'est l'heure des CHATS (et autre). Envoyez animaux svp !!`);
-    console.log('PetReal: message sent.')
 }
