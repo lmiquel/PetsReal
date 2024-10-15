@@ -12,7 +12,6 @@ export const registerCommands = async (client) => {
     try {
         console.log('Started refreshing application (/) commands.');
 
-
         client.commands = new Collection();
         client.commands.set(setChannelCommand.data.name, setChannelCommand);
         client.commands.set(setRoleCommand.data.name, setRoleCommand);

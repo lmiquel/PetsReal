@@ -18,17 +18,21 @@ export const scheduleRandomTimeMessage = (client) => {
         console.log(`PetsReal: message programmed at ${nextTime}`);
                 
         const timeUntilNextMessage = nextTime - now;
-        currentTimeout = setTimeout(() => {
-            sendMessage(client);
+        currentTimeout = setTimeout(async () => {
+            await sendMessage(client);
             scheduleRandomTimeMessage();
         }, timeUntilNextMessage);
     }
 }
 
-const sendMessage = (client) => {
-    const channel = client.channels.cache.get(channel_id);
+const sendMessage = async (client) => {
+    const { channels, selectedChannelId, selectedRoleId } = client;
+    
+    const channel = channels.cache.get(selectedChannelId);
+    const mention = selectedRoleId ? `<@&${selectedRoleId}> ` : '';
+    
     if (!channel) return console.error('PetsReal: Channel not found!');
 
-    channel.send("C'est l'heure des CHATS (et autre). Envoyez animaux svp !!");
+    await channel.send(`${mention}C'est l'heure des CHATS (et autre). Envoyez animaux svp !!`);
     console.log('PetReal: message sent.')
 }

@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import { Client, GatewayIntentBits } from 'discord.js';
-import { scheduleRandomTimeMessage } from './utils/schedule-message.js';
-import { registerCommands } from './utils/register-commands.js';
+import { scheduleRandomTimeMessage } from './src/utils/schedule-message.js';
+import { registerCommands } from './src/utils/register-commands.js';
 
 dotenv.config();
 
