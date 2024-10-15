@@ -12,16 +12,17 @@ export const registerAllCommands = async (client, botId) => {
     try {
         console.log('Started refreshing application (/) commands.');
 
-        const commands = await loadAllCommands();
         client.commands = new Collection();
-        await setAllCommands(client)
+        const commands = await loadAllCommands();
+        await setAllCommands(client, commands)
         
         client.selectedChannelId = null;
         client.selectedRoleId = null;
 
+        const body = commands.map(({ data }) => data);
         await rest.put(
             Routes.applicationCommands(botId),
-            { body: commands },
+            { body },
         );
 
         console.log('Successfully reloaded application (/) commands.');
