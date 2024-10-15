@@ -1,17 +1,16 @@
+import { getRandomDate } from "./get-random-date.js";
 import { sendMessage } from "./send-message.js";
 
 let currentTimeout = null;
 
-export const scheduleRandomTimeMessage = (client) => {
+export const scheduleRandomTimeMessage = (client, forTomorrow = false) => {
     if (currentTimeout) clearTimeout(currentTimeout);
     
     const now = new Date();
-    
-    const randomHour = Math.floor(Math.random() * 24);
-    const randomMinute = Math.floor(Math.random() * 60);
-    const randomSecond = Math.floor(Math.random() * 60);
+    const today = now;
+    const tomorrow = new Date(now.setDate(now.getDate() + 1))
 
-    const nextTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), randomHour, randomMinute, randomSecond);
+    const nextTime = getRandomDate(forTomorrow ? tomorrow : today)
 
     if (nextTime <= now) {
         console.log('PetsReal: Programmed date already in the past. Reprogramming a new time.')
@@ -22,7 +21,7 @@ export const scheduleRandomTimeMessage = (client) => {
         const timeUntilNextMessage = nextTime - now;
         currentTimeout = setTimeout(async () => {
             await sendMessage(client);
-            scheduleRandomTimeMessage(client);
+            scheduleRandomTimeMessage(client, true);
         }, timeUntilNextMessage);
     }
 }
