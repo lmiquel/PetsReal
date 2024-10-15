@@ -7,10 +7,10 @@ export const scheduleRandomTimeMessage = (client, forTomorrow = false) => {
     if (currentTimeout) clearTimeout(currentTimeout);
     
     const now = new Date();
-    const today = now;
-    const tomorrow = new Date(now.setDate(now.getDate() + 1))
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1)
 
-    const nextTime = getRandomDate(forTomorrow ? tomorrow : today)
+    const nextTime = getRandomDate(forTomorrow ? tomorrow : now)
 
     if (nextTime <= now) {
         console.log('PetsReal: Programmed date already in the past. Reprogramming a new time.')
