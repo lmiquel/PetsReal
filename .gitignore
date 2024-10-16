@@ -1,5 +1,8 @@
+# modules
 node_modules/
 
-database.sqlite
+# database
+*.sqlite
 
+# environnement
 .env
