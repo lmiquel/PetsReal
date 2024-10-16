@@ -6,8 +6,6 @@ PetsReal is a customizable Discord bot designed to send messages at random times
 
 - **Random Time Messaging**: The bot sends messages at random times during the day and automatically reschedules for the next day.
 - **Custom Commands**: Define guild-specific commands like `/set-channel`, `/set-role`, and `/set-message` to control bot behavior.
-- **Slash Commands**: Integrates easily with Discord’s slash command system.
-- **Configurable**: Use environment variables to easily configure the bot.
 
 ## Command Overview
 
