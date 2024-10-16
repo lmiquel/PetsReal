@@ -1,3 +1,5 @@
+import { getMessageInfos } from "./helpers/get-message-infos.js";
+
 export const sendMessageToAllGuilds = async (client) => {
     for await (const guild of client.guilds.cache.values()) {
         const config = client.guildConfigs.get(guild.id);
@@ -6,11 +8,7 @@ export const sendMessageToAllGuilds = async (client) => {
             continue;
         }
     
-        const { selectedChannelId, selectedRoleId, customMessage } = config;
-        const channel = guild.channels.cache.get(selectedChannelId);
-        const mention = guild.roles.cache.get(selectedRoleId);
-        const message = customMessage || "C'est l'heure des CHATS (et autre). Envoyez animaux svp !! (ce message peut être personnalisé via la commande '/setmessage')";
-    
+        const { channel, mention, message } = getMessageInfos(guild, config)
         if (!channel) {
             console.log(`No channel found for guild ${guild.name}`);
             continue;

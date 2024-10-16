@@ -5,7 +5,7 @@ export const loadAllCommands = async () => {
     const commands = [];
 
     for await (const file of commandFiles) {
-        const command = await import(`../commands/${file}`);
+        const command = await import(`../../commands/${file}`);
         commands.push(command.default);
     }
 

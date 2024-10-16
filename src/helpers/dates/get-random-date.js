@@ -1,4 +1,4 @@
-import { getRandomIntInRange } from "./get-random-int-in-range.js";
+import { getRandomIntInRange } from "../numbers/get-random-int-in-range.js";
 
 export const getRandomDate = (baseDate) => {
     if (!baseDate || !(baseDate instanceof Date)) console.error('Invalid date provided.');

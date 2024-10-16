@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "discord.js";
-import { setConfig } from "../database/helpers/set-guild-config.js";
+import { setConfig } from "../database/guilds/set-guild-config.js";
 
 const setRoleCommand = {
     data: new SlashCommandBuilder()

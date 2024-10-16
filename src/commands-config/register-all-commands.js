@@ -1,7 +1,7 @@
-import { loadAllCommands } from './load-all-commands.js';
-import { setCommandsIntoClient } from './set-commands-into-client.js';
-import { sendCommandsToDiscord } from './send-commands-to-discord.js';
 import { Collection } from 'discord.js';
+import { loadAllCommands } from './helpers/load-all-commands.js';
+import { setCommandsIntoClient } from './helpers/set-commands-into-client.js';
+import { sendCommandsToDiscord } from './send-commands-to-discord.js';
 
 export const registerAllCommands = async (client) => {
     try {

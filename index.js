@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import { Client, Collection, GatewayIntentBits } from 'discord.js';
 import { initDB } from './src/database/db.js';
-import { loadGuildConfigsFromDatabase } from './src/database/helpers/load-guild-configs-from-database.js';
+import { loadGuildConfigsFromDatabase } from './src/database/guilds/load-guild-configs-from-database.js';
 import { registerAllCommands } from './src/commands-config/register-all-commands.js';
 import { scheduleRandomTimeMessage } from './src/message/schedule-message.js';
 

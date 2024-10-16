@@ -1,5 +1,5 @@
-import { getRandomDate } from "../helpers/get-random-date.js";
-import { getTargetDate } from "../helpers/get-target-date.js";
+import { getRandomDate } from "../helpers/dates/get-random-date.js";
+import { getTargetDate } from "../helpers/dates/get-target-date.js";
 import { sendMessageToAllGuilds } from "./send-message-to-all-guilds.js";
 
 let currentTimeout = null;

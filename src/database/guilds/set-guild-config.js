@@ -6,7 +6,6 @@ export const setConfig = async (guildId, config, client) => {
 };
 
 const updateGuildConfig = async (guildId, config) => {
-    console.log(guildId, config)
     await GuildConfig.upsert({
         guildId: guildId,
         selectedChannelId: config.selectedChannelId,
