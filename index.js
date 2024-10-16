@@ -1,11 +1,12 @@
 import dotenv from 'dotenv';
 import { Client, Collection, GatewayIntentBits } from 'discord.js';
-import { scheduleRandomTimeMessage } from './src/message/schedule-message.js';
+import { initDB } from './src/database/db.js';
+import { loadGuildConfigsFromDatabase } from './src/database/helpers/load-guild-configs-from-database.js';
 import { registerAllCommands } from './src/commands-config/register-all-commands.js';
+import { scheduleRandomTimeMessage } from './src/message/schedule-message.js';
 
 dotenv.config();
 const token = process.env.DISCORD_BOT_TOKEN;
-const botId = process.env.DISCORD_BOT_ID;
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -13,7 +14,10 @@ const startBot = async () => {
     try {
         client.guildConfigs = new Collection();
 
-        await registerAllCommands(client, botId);
+        await initDB();
+        await loadGuildConfigsFromDatabase(client);
+
+        await registerAllCommands(client);
         
         client.once('ready', () => {
             console.log(`PetsReal is online!`);

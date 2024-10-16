@@ -1,4 +1,5 @@
 import { SlashCommandBuilder } from "discord.js";
+import { setConfig } from "../database/helpers/set-guild-config.js";
 
 const setChannelCommand = {
     data: new SlashCommandBuilder()
@@ -18,7 +19,7 @@ const setChannelCommand = {
         }
 
         guildConfig.selectedChannelId = channel.id;
-        client.guildConfigs.set(interaction.guildId, guildConfig);
+        setConfig(interaction.guildId, guildConfig, client);
 
         await interaction.reply(`Le channel a été défini sur ${channel}`);
     },

@@ -1,4 +1,5 @@
 import { SlashCommandBuilder } from "discord.js";
+import { setConfig } from "../database/helpers/set-guild-config.js";
 
 const setMessageCommand = {
     data: new SlashCommandBuilder()
@@ -14,7 +15,7 @@ const setMessageCommand = {
         const customMessage = interaction.options.getString('message');
 
         guildConfig.customMessage = customMessage;
-        client.guildConfigs.set(interaction.guildId, guildConfig);
+        setConfig(interaction.guildId, guildConfig, client);
 
         await interaction.reply({
             content: `Le message personnalisé a été mis à jour : "${customMessage}"`,

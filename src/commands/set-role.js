@@ -1,4 +1,5 @@
 import { SlashCommandBuilder } from "discord.js";
+import { setConfig } from "../database/helpers/set-guild-config.js";
 
 const setRoleCommand = {
     data: new SlashCommandBuilder()
@@ -14,7 +15,7 @@ const setRoleCommand = {
         const role = interaction.options.getRole('role');
 
         guildConfig.selectedRoleId = role.id;
-        client.guildConfigs.set(interaction.guildId, guildConfig);
+        setConfig(interaction.guildId, guildConfig, client);
 
         await interaction.reply(`Le rôle a été défini sur ${role}`);
     },
