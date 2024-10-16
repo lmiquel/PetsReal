@@ -18,7 +18,10 @@ const helpCommand = {
             helpMessage += `**${command.name}** - ${command.description}\n`;
         });
 
-        await interaction.reply(helpMessage);
+        await interaction.reply({ 
+            content: helpMessage, 
+            ephemeral: true, 
+        });
     },
 };
 
