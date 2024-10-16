@@ -10,9 +10,12 @@ const setRoleCommand = {
                 .setRequired(true)),
                 
     async execute(interaction, client) {
+        const guildConfig = client.guildConfigs.get(interaction.guildId) || {};
         const role = interaction.options.getRole('role');
 
-        client.selectedRoleId = role.id;
+        guildConfig.selectedRoleId = role.id;
+        client.guildConfigs.set(interaction.guildId, guildConfig);
+
         await interaction.reply(`Le rôle a été défini sur ${role}`);
     },
 };

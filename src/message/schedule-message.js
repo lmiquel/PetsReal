@@ -1,6 +1,6 @@
 import { getRandomDate } from "../helpers/get-random-date.js";
 import { getTargetDate } from "../helpers/get-target-date.js";
-import { sendMessage } from "./send-message.js";
+import { sendMessageToAllGuilds } from "./send-message-to-all-guilds.js";
 
 let currentTimeout = null;
 
@@ -26,7 +26,7 @@ const scheduleTimeout = (client, nextTime) => {
 
     currentTimeout = setTimeout(async () => {
         try {
-            await sendMessage(client);
+            await sendMessageToAllGuilds(client);
             scheduleRandomTimeMessage(client, true);
         } catch (error) {
             console.error('Error while sending message:', error);

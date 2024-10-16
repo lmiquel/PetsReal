@@ -10,13 +10,16 @@ const setChannelCommand = {
                 .setRequired(true)),
                 
     async execute(interaction, client) {
+        const guildConfig = client.guildConfigs.get(interaction.guildId) || {};
         const channel = interaction.options.getChannel('channel');
 
         if (channel.type !== 0) {
             return interaction.reply('Veuillez sélectionner un channel textuel.');
         }
 
-        client.selectedChannelId = channel.id;
+        guildConfig.selectedChannelId = channel.id;
+        client.guildConfigs.set(interaction.guildId, guildConfig);
+
         await interaction.reply(`Le channel a été défini sur ${channel}`);
     },
 };

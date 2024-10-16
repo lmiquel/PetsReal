@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import { Client, GatewayIntentBits } from 'discord.js';
+import { Client, Collection, GatewayIntentBits } from 'discord.js';
 import { scheduleRandomTimeMessage } from './src/message/schedule-message.js';
 import { registerAllCommands } from './src/commands-config/register-all-commands.js';
 
@@ -11,6 +11,8 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 const startBot = async () => {
     try {
+        client.guildConfigs = new Collection();
+
         await registerAllCommands(client, botId);
         
         client.once('ready', () => {

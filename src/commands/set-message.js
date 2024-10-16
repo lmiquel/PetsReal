@@ -10,8 +10,11 @@ const setMessageCommand = {
                 .setRequired(true)),
                 
     async execute(interaction, client) {
+        const guildConfig = client.guildConfigs.get(interaction.guildId) || {};
         const customMessage = interaction.options.getString('message');
-        client.customMessage = customMessage;
+
+        guildConfig.customMessage = customMessage;
+        client.guildConfigs.set(interaction.guildId, guildConfig);
 
         await interaction.reply({
             content: `Le message personnalisé a été mis à jour : "${customMessage}"`,
