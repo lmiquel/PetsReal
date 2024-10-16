@@ -23,6 +23,9 @@ Allows users to set a custom message to be sent at random times.
 ### `/help`
 Provides a detailed list of commands and their functionality in a markdown-formatted message.
 
+## Terms of Service
+Please read our [Terms of Service](TERMS.md).
+
 ## License
 
 This project is open-source and available under the MIT License. See the [LICENSE.txt](LICENSE.txt) file for details.
