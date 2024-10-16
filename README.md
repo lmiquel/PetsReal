@@ -26,6 +26,9 @@ Provides a detailed list of commands and their functionality in a markdown-forma
 ## Terms of Service
 Please read our [Terms of Service](TERMS.md).
 
+## Privacy Policy
+Your privacy is important to us. Please read our [Privacy Policy](PRIVACY_POLICY.md) for more information.
+
 ## License
 
 This project is open-source and available under the MIT License. See the [LICENSE.txt](LICENSE.txt) file for details.
