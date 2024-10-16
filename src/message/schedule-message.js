@@ -1,27 +1,36 @@
-import { getRandomDate } from "./get-random-date.js";
+import { getRandomDate } from "../helpers/get-random-date.js";
+import { getTargetDate } from "../helpers/get-target-date.js";
 import { sendMessage } from "./send-message.js";
 
 let currentTimeout = null;
 
-export const scheduleRandomTimeMessage = (client, forTomorrow = false) => {
+export const scheduleRandomTimeMessage = (client, isForTomorrow = false) => {
     if (currentTimeout) clearTimeout(currentTimeout);
     
     const now = new Date();
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1)
-
-    const nextTime = getRandomDate(forTomorrow ? tomorrow : now)
+    const targetDate = getTargetDate(now, isForTomorrow)
+    const nextTime = getRandomDate(targetDate);
 
     if (nextTime <= now) {
-        console.log('PetsReal: Programmed date already in the past. Reprogramming a new time.')
+        console.log('Programmed date already in the past. Reprogramming a new time.');
         scheduleRandomTimeMessage(client);
     } else {
-        console.log(`PetsReal: message programmed at ${nextTime}`);
-                
-        const timeUntilNextMessage = nextTime - now;
-        currentTimeout = setTimeout(async () => {
+        console.log(`Message scheduled for ${nextTime}.`);
+        scheduleTimeout(client, nextTime);
+    }
+};
+
+const scheduleTimeout = (client, nextTime) => {
+    const now = new Date();
+    const timeUntilNextMessage = nextTime - now;
+
+    currentTimeout = setTimeout(async () => {
+        try {
             await sendMessage(client);
             scheduleRandomTimeMessage(client, true);
-        }, timeUntilNextMessage);
-    }
-}
+        } catch (error) {
+            console.error('Error while sending message:', error);
+            scheduleRandomTimeMessage(client, true);
+        }
+    }, timeUntilNextMessage);
+};

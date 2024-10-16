@@ -8,14 +8,25 @@ const token = process.env.DISCORD_BOT_TOKEN;
 const botId = process.env.DISCORD_BOT_ID;
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-await registerAllCommands(client, botId);
 
-client.once('ready',() => {
-    console.log(`PetsReal is online!`);
-    scheduleRandomTimeMessage(client);
-});
+const startBot = async () => {
+    try {
+        await registerAllCommands(client, botId);
+        
+        client.once('ready', () => {
+            console.log(`PetsReal is online!`);
+            scheduleRandomTimeMessage(client);
+        });
+        
+        client.on('interactionCreate', handleInteraction);
 
-client.on('interactionCreate', async (interaction) => {
+        await client.login(token);
+    } catch (error) {
+        console.error('Error while initializing bot.', error);
+    }
+};
+
+const handleInteraction = async (interaction) => {
     if (!interaction.isCommand()) return;
 
     const command = client.commands.get(interaction.commandName);
@@ -24,9 +35,9 @@ client.on('interactionCreate', async (interaction) => {
     try {
         await command.execute(interaction, client);
     } catch (error) {
-        console.error(error);
+        console.error(`Error while executing command ${interaction.commandName}:`, error);
         await interaction.reply({ content: 'Une erreur s\'est produite lors de l\'exécution de la commande.', ephemeral: true });
     }
-});
+};
 
-client.login(token);
+startBot();

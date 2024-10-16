@@ -8,6 +8,7 @@ const setRoleCommand = {
             option.setName('role')
                 .setDescription('Le rôle à utiliser')
                 .setRequired(true)),
+                
     async execute(interaction, client) {
         const role = interaction.options.getRole('role');
 

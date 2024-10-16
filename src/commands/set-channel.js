@@ -8,6 +8,7 @@ const setChannelCommand = {
             option.setName('channel')
                 .setDescription('Le channel à utiliser')
                 .setRequired(true)),
+                
     async execute(interaction, client) {
         const channel = interaction.options.getChannel('channel');
 
