@@ -1,4 +1,4 @@
-import { GuildConfig } from "../db.js";
+import { GuildConfig } from '../db.js';
 
 export const setConfig = async (guildId, config, client) => {
     client.guildConfigs.set(guildId, config);
@@ -10,6 +10,6 @@ const updateGuildConfig = async (guildId, config) => {
         guildId: guildId,
         selectedChannelId: config.selectedChannelId,
         selectedRoleId: config.selectedRoleId,
-        customMessage: config.customMessage
+        customMessage: config.customMessage,
     });
 };

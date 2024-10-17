@@ -8,11 +8,11 @@ export const registerAllCommands = async (client) => {
         console.log('Started refreshing application (/) commands.');
 
         client.commands = new Collection();
-        
+
         const commands = await loadAllCommands();
         if (commands.length === 0) return;
 
-        await setCommandsIntoClient(client, commands)
+        await setCommandsIntoClient(client, commands);
 
         await sendCommandsToDiscord(commands);
 
@@ -20,4 +20,4 @@ export const registerAllCommands = async (client) => {
     } catch (error) {
         console.error('Error registering commands:', error);
     }
-}
+};

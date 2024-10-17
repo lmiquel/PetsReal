@@ -1,15 +1,17 @@
-import { SlashCommandBuilder } from "discord.js";
-import { setConfig } from "../database/guilds/set-guild-config.js";
+import { SlashCommandBuilder } from 'discord.js';
+import { setConfig } from '../database/guilds/set-guild-config.js';
 
 const setMessageCommand = {
     data: new SlashCommandBuilder()
         .setName('setmessage')
         .setDescription('Choisissez le message à envoyer.')
-        .addStringOption(option =>
-            option.setName('message')
+        .addStringOption((option) =>
+            option
+                .setName('message')
                 .setDescription('Le message à envoyer')
-                .setRequired(true)),
-                
+                .setRequired(true),
+        ),
+
     async execute(interaction, client) {
         const guildConfig = client.guildConfigs.get(interaction.guildId) || {};
         const customMessage = interaction.options.getString('message');
