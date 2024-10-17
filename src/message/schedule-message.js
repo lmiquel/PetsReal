@@ -1,18 +1,20 @@
-import { getRandomDate } from "../helpers/dates/get-random-date.js";
-import { getTargetDate } from "../helpers/dates/get-target-date.js";
-import { sendMessageToAllGuilds } from "./send-message-to-all-guilds.js";
+import { getRandomDate } from '../helpers/dates/get-random-date.js';
+import { getTargetDate } from '../helpers/dates/get-target-date.js';
+import { sendMessageToAllGuilds } from './send-message-to-all-guilds.js';
 
 let currentTimeout = null;
 
 export const scheduleRandomTimeMessage = (client, isForTomorrow = false) => {
     if (currentTimeout) clearTimeout(currentTimeout);
-    
+
     const now = new Date();
-    const targetDate = getTargetDate(now, isForTomorrow)
+    const targetDate = getTargetDate(now, isForTomorrow);
     const nextTime = getRandomDate(targetDate);
 
     if (nextTime <= now) {
-        console.log('Programmed date already in the past. Reprogramming a new time.');
+        console.log(
+            'Programmed date already in the past. Reprogramming a new time.',
+        );
         scheduleRandomTimeMessage(client);
     } else {
         console.log(`Message scheduled for ${nextTime}.`);
